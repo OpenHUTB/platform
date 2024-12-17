@@ -1,0 +1,65 @@
+# 奖励配置
+rewards:
+  # 基础奖励
+  base:
+    # 距离奖励
+    distance:
+      weight: 1.0
+      type: exponential
+      scale: 10.0
+      min_distance: 2.0
+
+    # 速度奖励
+    speed:
+      weight: 0.5
+      target_speed: 30.0 # km/h
+      tolerance: 5.0
+      penalty_factor: 0.1
+
+    # 方向奖励
+    heading:
+      weight: 0.3
+      max_angle: 45.0
+      penalty_factor: 0.2
+
+  # 惩罚项
+  penalties:
+    # 碰撞惩罚
+    collision:
+      weight: -100.0
+      min_intensity: 0.0
+      max_intensity: 100.0
+
+    # 车道偏离惩罚
+    lane_invasion:
+      weight: -10.0
+      per_invasion: true
+
+    # 交通规则违反惩罚
+    traffic_rule:
+      weight: -50.0
+      red_light: -100.0
+      stop_sign: -30.0
+
+  # 完成奖励
+  completion:
+    success: 100.0
+    timeout: -50.0
+    min_progress: 0.8
+
+  # 舒适度奖励
+  comfort:
+    # 加速度惩罚
+    acceleration:
+      weight: -0.2
+      max_value: 3.0
+
+    # 加加速度惩罚
+    jerk:
+      weight: -0.1
+      max_value: 2.0
+
+    # 转向惩罚
+    steering:
+      weight: -0.2
+      max_rate: 0.3

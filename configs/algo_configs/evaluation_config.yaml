@@ -1,0 +1,129 @@
+# 评估配置
+
+# 通用评估设置
+common:
+  seed: 42
+  device: "cuda"
+  num_workers: 4
+  deterministic: true
+
+# 评估场景
+scenarios:
+  # 城市场景
+  urban:
+    num_episodes: 50
+    max_steps: 1000
+    success_threshold: 0.8
+    scenarios:
+      - "urban_empty"
+      - "urban_light_traffic"
+      - "urban_heavy_traffic"
+      - "urban_adverse_weather"
+
+  # 高速场景
+  highway:
+    num_episodes: 50
+    max_steps: 1000
+    success_threshold: 0.8
+    scenarios:
+      - "highway_empty"
+      - "highway_traffic"
+      - "highway_merge"
+      - "highway_exit"
+
+  # 路口场景
+  intersection:
+    num_episodes: 50
+    max_steps: 1000
+    success_threshold: 0.8
+    scenarios:
+      - "intersection_traffic_light"
+      - "intersection_stop_sign"
+      - "intersection_yield"
+      - "intersection_unprotected_left"
+
+# 评估指标
+metrics:
+  # 安全指标
+  safety:
+    collision_rate:
+      threshold: 0.1
+      weight: 2.0
+    min_distance:
+      threshold: 2.0
+      weight: 1.0
+    traffic_rule_violation:
+      threshold: 0.2
+      weight: 1.5
+
+  # 效率指标
+  efficiency:
+    success_rate:
+      threshold: 0.8
+      weight: 2.0
+    completion_rate:
+      threshold: 0.9
+      weight: 1.0
+    average_speed:
+      threshold: 30.0
+      weight: 1.0
+    travel_time:
+      threshold: 120.0
+      weight: 1.0
+
+  # 舒适度指标
+  comfort:
+    acceleration:
+      threshold: 2.0
+      weight: 1.0
+    jerk:
+      threshold: 1.0
+      weight: 1.0
+    steering_angle_change:
+      threshold: 0.1
+      weight: 1.0
+
+# 可视化设置
+visualization:
+  # 轨迹可视化
+  trajectory:
+    enabled: true
+    save_path: "experiments/results/trajectories"
+    plot_types:
+      - "2d_path"
+      - "speed_profile"
+      - "acceleration_profile"
+      - "steering_profile"
+
+  # 场景回放
+  replay:
+    enabled: true
+    save_path: "experiments/results/replays"
+    camera_views:
+      - "bird_eye"
+      - "follow"
+      - "side"
+    record_video: true
+    video_fps: 30
+
+  # 指标可视化
+  metrics:
+    enabled: true
+    save_path: "experiments/results/metrics"
+    plot_types:
+      - "success_rate_by_scenario"
+      - "collision_heatmap"
+      - "speed_distribution"
+      - "distance_distribution"
+
+# 报告生成
+report:
+  enabled: true
+  template_path: "templates/evaluation_report.md"
+  save_path: "experiments/results/reports"
+  include_sections:
+    - "executive_summary"
+    - "scenario_results"
+    - "metric_analysis"
+    - "failure_cases"
+    - "recommendations"

@@ -1,0 +1,108 @@
+# 基础算法配置模板
+
+# 网络配置
+network:
+  # 特征提取器
+  feature_extractor:
+    type: "cnn"  # cnn, mlp, lstm, transformer
+    cnn_config:
+      channels: [32, 64, 64]
+      kernels: [8, 4, 3]
+      strides: [4, 2, 1]
+    mlp_config:
+      hidden_sizes: [256, 256]
+      activation: "relu"
+    lstm_config:
+      hidden_size: 256
+      num_layers: 2
+    transformer_config:
+      n_layers: 3
+      n_heads: 8
+      d_model: 256
+      
+  # 策略网络
+  policy_net:
+    type: "gaussian"  # gaussian, categorical, deterministic
+    hidden_sizes: [256, 256]
+    activation: "tanh"
+    
+  # 价值网络
+  value_net:
+    hidden_sizes: [256, 256]
+    activation: "relu"
+
+# 训练配置
+training:
+  # 基础参数
+  total_timesteps: 1000000
+  learning_rate: 3.0e-4
+  batch_size: 64
+  n_epochs: 10
+  
+  # 优化器配置
+  optimizer:
+    type: "adam"
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    weight_decay: 0.0
+    
+  # 学习率调度
+  lr_schedule:
+    type: "linear"  # linear, cosine, constant
+    warmup_steps: 1000
+    
+  # 梯度设置
+  max_grad_norm: 0.5
+  grad_clip: true
+  
+  # 经验回放
+  buffer_size: 10000
+  min_buffer_size: 1000
+  
+  # 其他设置
+  gamma: 0.99
+  gae_lambda: 0.95
+  normalize_advantages: true
+  clip_range: 0.2
+  target_kl: 0.01
+  entropy_coef: 0.01
+  value_coef: 0.5
+
+# 评估配置
+evaluation:
+  eval_interval: 10000
+  n_eval_episodes: 10
+  save_video: true
+  metrics:
+    - reward
+    - length
+    - success_rate
+    - collision_rate
+    - completion_rate
+    - avg_speed
+    - avg_acceleration
+    - min_distance
+
+# 日志配置
+logging:
+  log_interval: 1000
+  save_interval: 50000
+  log_dir: "experiments/logs"
+  save_dir: "experiments/checkpoints"
+  tensorboard: true
+  wandb: false
+  
+# 环境配置
+environment:
+  frame_skip: 4
+  time_limit: 1000
+  reward_scale: 1.0
+  clip_actions: true
+  normalize_obs: true
+  
+# 硬件配置
+hardware:
+  device: "cuda"
+  num_workers: 4
+  seed: 42
+  deterministic: true 

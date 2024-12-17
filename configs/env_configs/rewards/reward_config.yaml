@@ -1,0 +1,86 @@
+# 奖励函数配置
+
+# 安全奖励
+safety_rewards:
+  # 碰撞惩罚
+  collision:
+    enabled: true
+    weight: -100.0
+    types:
+      - "vehicle"
+      - "pedestrian"
+      - "static"
+
+  # 安全距离奖励
+  safe_distance:
+    enabled: true
+    weight: 1.0
+    threshold: 5.0
+    scaling: "exponential"
+
+  # 车道偏离惩罚
+  lane_deviation:
+    enabled: true
+    weight: -1.0
+    threshold: 0.5
+
+# 效率奖励
+efficiency_rewards:
+  # 速度奖励
+  speed:
+    enabled: true
+    weight: 1.0
+    target_speed: 30.0
+    tolerance: 5.0
+
+  # 进度奖励
+  progress:
+    enabled: true
+    weight: 2.0
+    checkpoint_bonus: 10.0
+
+  # 完成奖励
+  completion:
+    enabled: true
+    weight: 100.0
+    min_progress: 0.9
+
+# 舒适度奖励
+comfort_rewards:
+  # 加速度惩罚
+  acceleration:
+    enabled: true
+    weight: -0.5
+    threshold: 2.0
+
+  # 抖动惩罚
+  jerk:
+    enabled: true
+    weight: -0.3
+    threshold: 1.0
+
+  # 转向惩罚
+  steering:
+    enabled: true
+    weight: -0.2
+    threshold: 0.3
+
+# 规则遵守奖励
+rule_rewards:
+  # 红绿灯
+  traffic_light:
+    enabled: true
+    weight: -50.0
+    stop_line_distance: 3.0
+
+  # 限速
+  speed_limit:
+    enabled: true
+    weight: -1.0
+    tolerance: 5.0
+
+  # 停车标志
+  stop_sign:
+    enabled: true
+    weight: -30.0
+    stop_line_distance: 3.0

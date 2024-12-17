@@ -1,0 +1,62 @@
+# 城市场景配置
+scenario:
+  # 地图设置
+  map: Town03
+  spawn_points: auto
+
+  # 天气设置
+  weather:
+    presets:
+      - name: clear_noon
+        cloudiness: 0
+        precipitation: 0
+        sun_altitude: 45
+
+      - name: light_rain
+        cloudiness: 50
+        precipitation: 30
+        sun_altitude: 45
+
+      - name: heavy_rain
+        cloudiness: 90
+        precipitation: 80
+        sun_altitude: 45
+
+  # 交通设置
+  traffic:
+    vehicles:
+      amount: 30
+      types:
+        - vehicle.tesla.model3
+        - vehicle.audi.a2
+        - vehicle.toyota.prius
+      behaviors:
+        - normal
+        - aggressive
+        - cautious
+
+    pedestrians:
+      amount: 20
+      types:
+        - walker.pedestrian.0001
+        - walker.pedestrian.0002
+      behaviors:
+        - normal
+        - running
+
+  # 事件设置
+  events:
+    - type: sudden_braking
+      probability: 0.3
+      min_distance: 20
+      max_distance: 50
+
+    - type: pedestrian_crossing
+      probability: 0.4
+      min_distance: 15
+      max_distance: 30
+
+    - type: vehicle_cutting_in
+      probability: 0.3
+      min_distance: 10
+      max_distance: 40

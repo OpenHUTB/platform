@@ -1,0 +1,68 @@
+# 环境配置
+environment:
+  task: "custom_navigation"
+  scenario: "urban"
+  sync_mode: true
+  frame_skip: 4
+
+  # 传感器配置
+  sensors:
+    camera_rgb:
+      enabled: true
+      width: 800
+      height: 600
+      fov: 90
+    lidar:
+      enabled: true
+      channels: 32
+      range: 50.0
+
+  # 任务参数
+  target_speed: 30.0
+  min_distance: 5.0
+  time_limit: 1000
+
+# 算法配置
+algorithm:
+  name: "custom"
+  device: "cuda"
+
+  # 网络配置
+  policy_network:
+    type: "mlp"
+    hidden_sizes: [256, 256]
+    activation: "relu"
+
+  value_network:
+    type: "mlp"
+    hidden_sizes: [256, 256]
+    activation: "relu"
+
+  # 优化器配置
+  policy_optimizer:
+    type: "adam"
+    lr: 3.0e-4
+
+  value_optimizer:
+    type: "adam"
+    lr: 3.0e-4
+
+  # 训练参数
+  gamma: 0.99
+  buffer_size: 100000
+  batch_size: 256
+
+# 训练配置
+training:
+  max_steps: 1000000
+  eval_interval: 10000
+  save_interval: 10000
+  log_interval: 100
+
+# 评估配置
+evaluation:
+  n_episodes: 10
+  scenarios:
+    - "urban_easy"
+    - "urban_medium"
+    - "urban_hard"

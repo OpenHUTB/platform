@@ -1,0 +1,39 @@
+name: Team Workflow
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  review-required:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check review requirements
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const reviews = await github.pulls.listReviews({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            })
+            if (reviews.data.length === 0) {
+              core.setFailed('At least one review is required')
+            }
+
+  conventional-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check commit messages
+        uses: wagoid/commitlint-github-action@v4
+
+  branch-naming:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch naming
+        uses: deepakputhraya/action-branch-name@master
+        with:
+          regex: '(feature|bugfix|release)\/[a-z0-9-]+'
+          allowed_prefixes: "feature,bugfix,release"
+          ignore: main,develop

@@ -1,0 +1,105 @@
+# 环境配置
+environment:
+  # CARLA设置
+  carla:
+    host: ${CARLA_HOST:-localhost}
+    port: ${CARLA_PORT:-2000}
+    timeout: 20.0
+    sync_mode: true
+    delta_seconds: 0.05
+
+  # 传感器设置
+  sensors:
+    use_rgb_front: true
+    use_depth_front: true
+    use_semantic_front: true
+    use_lidar: true
+    use_gnss: true
+    use_imu: true
+
+  # 场景设置
+  scenario:
+    map: Town03
+    weather:
+      cloudiness: [0, 100]
+      precipitation: [0, 50]
+      sun_altitude: [20, 90]
+    traffic:
+      num_vehicles: 30
+      num_pedestrians: 20
+
+# 算法配置
+algorithm:
+  name: sac
+  device: ${CUDA_VISIBLE_DEVICES:-cuda}
+
+  # 网络架构
+  network:
+    encoder:
+      type: resnet18
+      pretrained: true
+      freeze_backbone: false
+
+    actor:
+      hidden_sizes: [256, 256]
+      activation: relu
+
+    critic:
+      hidden_sizes: [256, 256]
+      activation: relu
+
+  # 训练参数
+  training:
+    batch_size: 256
+    learning_rate: 3.0e-4
+    gamma: 0.99
+    tau: 0.005
+    alpha: 0.2
+    target_update_interval: 1
+    gradient_steps: 1
+
+  # 经验回放
+  buffer:
+    size: 1000000
+    prioritized: true
+    alpha: 0.6
+    beta: 0.4
+
+# 训练配置
+training:
+  total_steps: 1000000
+  eval_interval: 10000
+  save_interval: 10000
+  log_interval: 100
+
+  # 课程学习
+  curriculum:
+    enabled: true
+    stages:
+      - steps: 100000
+        traffic_density: 0.3
+        weather_difficulty: 0.3
+      - steps: 300000
+        traffic_density: 0.6
+        weather_difficulty: 0.6
+      - steps: 600000
+        traffic_density: 1.0
+        weather_difficulty: 1.0
+
+# 日志配置
+logging:
+  use_wandb: ${WANDB_ENABLED:-true}
+  project_name: carla-rl
+  group: ${exp_name}
+  tags: [sac, training]
+
+  use_tensorboard: true
+  log_dir: logs
+
+  metrics:
+    - reward
+    - success_rate
+    - collision_rate
+    - completion_time
+    - average_speed
+    - comfort_metrics

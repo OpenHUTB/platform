@@ -1,0 +1,62 @@
+# 可视化配置
+visualization:
+  # 窗口设置
+  window:
+    width: 1280
+    height: 720
+    title: "CARLA Visualization"
+
+  # 相机视图
+  camera:
+    main:
+      width: 800
+      height: 600
+      fov: 90
+      position: [0, 0, 10]
+      rotation: [-90, 0, 0]
+
+    bird_eye:
+      width: 400
+      height: 400
+      fov: 90
+      position: [0, 0, 50]
+      rotation: [-90, 0, 0]
+
+  # 显示选项
+  display:
+    show_vehicle_bbox: true
+    show_sensor_ranges: true
+    show_waypoints: true
+    show_trajectory: true
+    show_debug_text: true
+
+  # 颜色设置
+  colors:
+    background: [0, 0, 0]
+    vehicle: [0, 255, 0]
+    obstacle: [255, 0, 0]
+    waypoint: [0, 0, 255]
+    trajectory: [255, 255, 0]
+
+  # HUD设置
+  hud:
+    enabled: true
+    position: top_left
+    font_size: 20
+    show_fps: true
+    show_speed: true
+    show_status: true
+
+  # 录制设置
+  recording:
+    enabled: false
+    format: mp4
+    fps: 30
+    quality: high
+
+  # 调试选项
+  debug:
+    show_sensor_data: true
+    show_collision_points: true
+    show_vehicle_state: true
+    show_planning_info: true

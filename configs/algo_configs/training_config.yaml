@@ -1,0 +1,135 @@
+# 训练配置
+
+# 通用训练设置
+common:
+  seed: 42
+  debug: false
+  device: "cuda"
+  num_workers: 4
+  max_steps: 1000000
+  save_freq: 10000
+  eval_freq: 5000
+  log_freq: 100
+
+# 环境设置
+environment:
+  scenario_type: "urban" # urban, highway, intersection
+  num_envs: 8 # 并行环境数
+  frame_stack: 4 # 堆叠帧数
+  action_repeat: 4 # 动作重复次数
+  reward_scale: 1.0
+  time_limit: 1000
+
+# 数据收集
+data_collection:
+  buffer_size: 100000
+  batch_size: 256
+  n_steps: 2048
+  gamma: 0.99
+  gae_lambda: 0.95
+  use_priority: true
+  alpha: 0.6
+  beta: 0.4
+
+# 网络架构
+network:
+  # 视觉编码器
+  vision_encoder:
+    type: "resnet18"
+    pretrained: true
+    freeze_backbone: false
+    output_dim: 512
+
+  # 传感器融合
+  sensor_fusion:
+    type: "attention"
+    hidden_dim: 256
+    num_heads: 4
+    num_layers: 2
+
+  # 策略网络
+  policy:
+    type: "gaussian"
+    hidden_sizes: [256, 256]
+    activation: "relu"
+    log_std_bounds: [-20, 2]
+
+  # 价值网络
+  value:
+    hidden_sizes: [256, 256]
+    activation: "relu"
+
+# 优化器设置
+optimizer:
+  # 策略优���器
+  policy:
+    type: "adam"
+    lr: 3.0e-4
+    eps: 1.0e-5
+    weight_decay: 0.0
+    amsgrad: false
+
+  # 价值优化器
+  value:
+    type: "adam"
+    lr: 3.0e-4
+    eps: 1.0e-5
+    weight_decay: 0.0
+    amsgrad: false
+
+  # 学习率调度
+  lr_schedule:
+    type: "cosine"
+    warmup_steps: 1000
+    min_lr: 1.0e-5
+
+# 算法特定设置
+algorithm:
+  # PPO设置
+  ppo:
+    clip_range: 0.2
+    value_clip_range: 0.2
+    clip_grad_norm: 0.5
+    entropy_coef: 0.01
+    value_loss_coef: 0.5
+    target_kl: 0.015
+    n_epochs: 10
+    normalize_advantages: true
+
+  # SAC设置
+  sac:
+    alpha: 0.2
+    target_entropy: null
+    tau: 0.005
+    target_update_interval: 1
+    n_updates: 1
+
+# 日志设置
+logging:
+  # Tensorboard设置
+  tensorboard:
+    enabled: true
+    log_dir: "experiments/logs/tensorboard"
+    flush_secs: 10
+
+  # Wandb设置
+  wandb:
+    enabled: false
+    project: "carla_rl"
+    entity: "your_entity"
+    group: "training"
+
+  # 视频录制
+  video:
+    enabled: true
+    freq: 10000
+    num_episodes: 3
+    width: 640
+    height: 480
+
+  # 模型保存
+  checkpoint:
+    dir: "experiments/checkpoints"
+    keep_last_n: 5
+    save_best: true
+    metric: "success_rate"

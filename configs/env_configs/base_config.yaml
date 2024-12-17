@@ -1,0 +1,26 @@
+# 基础环境配置
+carla:
+  host: "localhost"
+  port: 2000
+  timeout: 10.0
+
+environment:
+  sync_mode: true
+  fixed_delta_seconds: 0.05
+
+sensors:
+  camera_rgb:
+    type: "sensor.camera.rgb"
+    width: 800
+    height: 600
+    fov: 90
+    position: [2.0, 0.0, 1.4]
+    rotation: [0.0, 0.0, 0.0]
+
+  lidar:
+    type: "sensor.lidar.ray_cast"
+    channels: 32
+    points_per_second: 56000
+    rotation_frequency: 10
+    range: 50.0
+    position: [0.0, 0.0, 2.4]

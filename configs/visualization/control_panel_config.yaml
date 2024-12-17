@@ -1,0 +1,105 @@
+# 控制面板配置
+
+# 训练设置
+training:
+  max_steps: 1000000
+  save_interval: 10000
+  eval_interval: 5000
+  log_interval: 100
+
+# 环境设置
+environment:
+  scenarios:
+    - name: "城市"
+      type: "urban"
+      description: "城市道路场景"
+    - name: "高速"
+      type: "highway"
+      description: "高速公路场景"
+    - name: "路口"
+      type: "intersection"
+      description: "十字路口场景"
+
+  weathers:
+    - name: "晴天"
+      type: "clear_noon"
+      description: "晴朗正午"
+    - name: "雨天"
+      type: "rain"
+      description: "雨天"
+    - name: "夜晚"
+      type: "night"
+      description: "夜晚场景"
+
+# 算法设置
+algorithm:
+  learning_rate:
+    min: 1.0e-6
+    max: 1.0
+    default: 3.0e-4
+
+  batch_size:
+    min: 1
+    max: 1024
+    default: 64
+
+  reward_weights:
+    safety:
+      min: 0.0
+      max: 2.0
+      default: 1.0
+    comfort:
+      min: 0.0
+      max: 2.0
+      default: 0.3
+    efficiency:
+      min: 0.0
+      max: 2.0
+      default: 0.5
+    task:
+      min: 0.0
+      max: 2.0
+      default: 1.0
+
+# 可视化设置
+visualization:
+  refresh_rate:
+    min: 0.1
+    max: 2.0
+    default: 0.5
+
+  components:
+    camera:
+      enabled: true
+      description: "相机视图"
+    lidar:
+      enabled: true
+      description: "激光雷达视图"
+    metrics:
+      enabled: true
+      description: "训练指标"
+
+# 调试设置
+debug:
+  manual_control:
+    enabled: true
+    controls:
+      steering:
+        min: -1.0
+        max: 1.0
+        default: 0.0
+      throttle:
+        min: 0.0
+        max: 1.0
+        default: 0.0
+      brake:
+        min: 0.0
+        max: 1.0
+        default: 0.0
+
+  profiling:
+    enabled: true
+    metrics:
+      - "fps"
+      - "memory_usage"
+      - "gpu_usage"

@@ -1,0 +1,110 @@
+# 场景配置
+
+# 城市场景
+urban_scenarios:
+  # 基础城市场景
+  urban_basic:
+    map: "Town03"
+    weather:
+      cloudiness: 0
+      precipitation: 0
+      sun_altitude_angle: 45
+    traffic:
+      num_vehicles: 30
+      num_pedestrians: 20
+      behavior: "normal"
+    spawn_points:
+      ego_vehicle: "random"
+      other_vehicles: "random"
+      pedestrians: "sidewalk"
+
+  # 复杂城市场景
+  urban_complex:
+    map: "Town05"
+    weather:
+      cloudiness: 60
+      precipitation: 30
+      sun_altitude_angle: 30
+    traffic:
+      num_vehicles: 50
+      num_pedestrians: 40
+      behavior: "mixed"
+    events:
+      - type: "sudden_brake"
+        probability: 0.3
+      - type: "pedestrian_crossing"
+        probability: 0.4
+      - type: "vehicle_cutting_in"
+        probability: 0.3
+
+# 高速场景
+highway_scenarios:
+  # 基础高速场景
+  highway_basic:
+    map: "Town04"
+    weather:
+      cloudiness: 0
+      precipitation: 0
+    traffic:
+      num_vehicles: 40
+      vehicle_speed: [80, 120]
+      behavior: "highway"
+    spawn_points:
+      ego_vehicle: "highway_entry"
+      other_vehicles: "highway_lanes"
+
+  # 复杂高速场景
+  highway_complex:
+    map: "Town04"
+    weather:
+      cloudiness: 30
+      precipitation: 20
+    traffic:
+      num_vehicles: 60
+      vehicle_speed: [60, 130]
+      behavior: "aggressive"
+    events:
+      - type: "vehicle_cutting_in"
+        probability: 0.4
+      - type: "sudden_brake"
+        probability: 0.3
+      - type: "slow_vehicle"
+        probability: 0.3
+
+# 交叉路口场景
+intersection_scenarios:
+  # 信号灯路口
+  traffic_light:
+    map: "Town05"
+    weather:
+      cloudiness: 0
+      precipitation: 0
+    traffic:
+      num_vehicles: 20
+      num_pedestrians: 10
+      behavior: "normal"
+    traffic_light:
+      state: "dynamic"
+      cycle_time: 30
+    spawn_points:
+      ego_vehicle: "intersection_approach"
+      other_vehicles: "intersection_all"
+
+  # 无保护左转
+  unprotected_left:
+    map: "Town03"
+    weather:
+      cloudiness: 20
+      precipitation: 0
+    traffic:
+      num_vehicles: 25
+      num_pedestrians: 15
+      behavior: "cautious"
+    spawn_points:
+      ego_vehicle: "left_turn_start"
+      other_vehicles: "opposing_straight"
+    events:
+      - type: "oncoming_vehicle"
+        probability: 0.7
+      - type: "pedestrian_crossing"
+        probability: 0.4

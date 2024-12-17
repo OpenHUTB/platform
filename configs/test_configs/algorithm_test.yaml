@@ -1,0 +1,103 @@
+# 算法测试配置
+
+# 基础测试
+basic_tests:
+  - name: "initialization_test"
+    description: "测试算法初始化"
+    config:
+      obs_dim: 10
+      act_dim: 2
+
+  - name: "prediction_test"
+    description: "测试动作预测"
+    config:
+      batch_size: 32
+      test_episodes: 10
+
+  - name: "training_test"
+    description: "测试训练过程"
+    config:
+      train_steps: 1000
+      eval_interval: 100
+
+# 性能测试
+performance_tests:
+  - name: "speed_test"
+    description: "测试训练速度"
+    config:
+      n_episodes: 100
+      max_steps: 1000
+
+  - name: "memory_test"
+    description: "测试内存使用"
+    config:
+      train_steps: 10000
+      profile_memory: true
+
+  - name: "gpu_test"
+    description: "测试GPU使用"
+    config:
+      batch_size: [32, 64, 128]
+      profile_gpu: true
+
+# 功能测试
+functional_tests:
+  - name: "save_load_test"
+    description: "测试模型保存加载"
+    config:
+      train_steps: 1000
+      save_interval: 100
+
+  - name: "multi_env_test"
+    description: "测试多环境支持"
+    config:
+      n_envs: [1, 2, 4, 8]
+      test_parallel: true
+
+# 稳定性测试
+stability_tests:
+  - name: "long_training_test"
+    description: "测试长期训练稳定性"
+    config:
+      train_steps: 1000000
+      eval_interval: 10000
+
+  - name: "random_seed_test"
+    description: "测试不同随机种子"
+    config:
+      seeds: [42, 43, 44, 45, 46]
+      train_steps: 10000
+
+# 场景测试
+scenario_tests:
+  - name: "urban_test"
+    description: "测试城市场景"
+    config:
+      scenario: "urban"
+      n_episodes: 50
+
+  - name: "highway_test"
+    description: "测试高速场景"
+    config:
+      scenario: "highway"
+      n_episodes: 50
+
+  - name: "intersection_test"
+    description: "测试路口场景"
+    config:
+      scenario: "intersection"
+      n_episodes: 50
+
+# 评估指标
+metrics:
+  - name: "success_rate"
+    threshold: 0.8
+
+  - name: "collision_rate"
+    threshold: 0.2
+
+  - name: "completion_rate"
+    threshold: 0.7
+
+  - name: "avg_reward"
+    threshold: 100.0

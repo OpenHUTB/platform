@@ -1,0 +1,66 @@
+# 日志配置
+logging:
+  # 基础设置
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"
+
+  # 文件日志
+  file:
+    enabled: true
+    path: logs
+    filename: training.log
+    max_bytes: 10485760 # 10MB
+    backup_count: 5
+
+  # 控制台日志
+  console:
+    enabled: true
+    color: true
+
+  # Wandb设置
+  wandb:
+    enabled: true
+    project: carla-rl
+    entity: your-org
+    tags: []
+    notes: ""
+    sync_tensorboard: true
+
+  # Tensorboard设置
+  tensorboard:
+    enabled: true
+    log_dir: runs
+    flush_secs: 10
+
+  # 指标记录
+  metrics:
+    # 训练指标
+    training:
+      record_interval: 100
+      metrics:
+        - loss
+        - value_loss
+        - policy_loss
+        - alpha_loss
+        - entropy
+
+    # 评估指标
+    evaluation:
+      record_interval: 1000
+      metrics:
+        - reward
+        - success_rate
+        - collision_rate
+        - completion_time
+
+    # 资源监控
+    monitoring:
+      enabled: true
+      record_interval: 10
+      metrics:
+        - gpu_usage
+        - gpu_memory
+        - cpu_usage
+        - memory_usage
+        - disk_usage

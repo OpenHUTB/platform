@@ -1,0 +1,25 @@
+# 导入基础依赖
+-r requirements.txt
+
+# 开发工具
+pytest-cov>=2.12.0
+pytest-xdist>=2.3.0
+pytest-benchmark>=3.4.1
+pre-commit>=2.15.0
+
+# 文档工具
+sphinx>=4.0.0
+sphinx-rtd-theme>=0.5.2
+sphinx-autodoc-typehints>=1.12.0
+
+# 代码质量
+pylint>=2.8.0
+isort>=5.9.0
+autopep8>=1.5.7
+yapf>=0.31.0
+
+# 调试工具
+ipython>=7.24.0
+ipdb>=0.13.0
+line-profiler>=3.3.0
+memory-profiler>=0.58.0 

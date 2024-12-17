@@ -1,0 +1,86 @@
+# 导航任务配置
+task:
+  name: navigation
+  version: 1.0
+
+  # 任务参数
+  parameters:
+    # 目标设置
+    target:
+      type: random_point
+      min_distance: 50.0
+      max_distance: 200.0
+      reachable_only: true
+
+    # 完成条件
+    completion:
+      distance_threshold: 2.0
+      heading_threshold: 15.0
+      time_limit: 1000
+
+    # 重置条件
+    reset:
+      collision: true
+      lane_invasion: false
+      timeout: true
+      off_road: true
+
+  # 观测空间
+  observation_space:
+    # 状态信息
+    state:
+      - position
+      - velocity
+      - acceleration
+      - heading
+      - target_info
+
+    # 传感器数据
+    sensors:
+      - rgb_front
+      - depth_front
+      - lidar
+      - gnss
+      - imu
+
+  # 动作空间
+  action_space:
+    type: continuous
+    control:
+      - throttle
+      - brake
+      - steer
+    bounds:
+      throttle: [0.0, 1.0]
+      brake: [0.0, 1.0]
+      steer: [-1.0, 1.0]
+
+  # 奖励设置
+  reward:
+    # 距离奖励
+    distance:
+      type: exponential
+      weight: 1.0
+      scale: 10.0
+
+    # 速度奖励
+    speed:
+      type: gaussian
+      weight: 0.5
+      target: 30.0
+      std: 5.0
+
+    # 方向奖励
+    heading:
+      type: cosine
+      weight: 0.3
+      scale: 1.0
+
+    # 碰撞惩罚
+    collision:
+      weight: -100.0
+
+    # 完成奖励
+    completion:
+      success: 100.0
+      timeout: -50.0

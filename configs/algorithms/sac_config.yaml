@@ -1,0 +1,75 @@
+# SAC算法配置
+algorithm:
+  name: sac
+  version: 1.0
+
+  # 基础参数
+  gamma: 0.99
+  tau: 0.005
+  alpha: 0.2
+  target_entropy: auto
+
+  # 网络配置
+  network:
+    # 编码器
+    encoder:
+      type: resnet18
+      pretrained: true
+      freeze_backbone: false
+      output_dim: 512
+
+    # 策略网络
+    policy:
+      type: gaussian
+      hidden_sizes: [512, 256, 256]
+      activation: relu
+      log_std_bounds: [-20, 2]
+
+    # 价值网络
+    value:
+      hidden_sizes: [512, 256, 256]
+      activation: relu
+      num_q_nets: 2
+
+  # 训练配置
+  training:
+    # 优化器
+    optimizer:
+      type: adam
+      lr_actor: 3e-4
+      lr_critic: 3e-4
+      lr_alpha: 3e-4
+      weight_decay: 0.0
+
+    # 经验回放
+    replay_buffer:
+      size: 1000000
+      batch_size: 256
+      prioritized: true
+      alpha: 0.6
+      beta: 0.4
+
+    # 更新设置
+    target_update_interval: 1
+    gradient_steps: 1
+    max_grad_norm: 10.0
+
+    # 探索设置
+    exploration:
+      type: gaussian
+      initial_scale: 1.0
+      final_scale: 0.1
+      scale_steps: 100000
+
+  # 评估配置
+  evaluation:
+    interval: 10000
+    episodes: 10
+    render: false
+    save_video: false
+
+  # 保存配置
+  checkpoint:
+    interval: 10000
+    max_keep: 5
+    save_replay_buffer: false

@@ -1,0 +1,80 @@
+# 评估配置
+evaluation:
+  # 基本设置
+  num_episodes: 100
+  seed: 42
+  render: false
+  save_video: true
+
+  # 场景设置
+  scenarios:
+    - name: urban_easy
+      map: Town03
+      weather: ClearNoon
+      traffic_density: 0.3
+      num_episodes: 20
+
+    - name: urban_medium
+      map: Town03
+      weather: WetNoon
+      traffic_density: 0.6
+      num_episodes: 20
+
+    - name: urban_hard
+      map: Town03
+      weather: HardRainNight
+      traffic_density: 1.0
+      num_episodes: 20
+
+    - name: highway_easy
+      map: Town04
+      weather: ClearNoon
+      traffic_density: 0.3
+      num_episodes: 20
+
+    - name: highway_hard
+      map: Town04
+      weather: WetNoon
+      traffic_density: 0.8
+      num_episodes: 20
+
+  # 指标设置
+  metrics:
+    # 安全指标
+    safety:
+      collision_penalty: -100.0
+      min_distance_threshold: 2.0
+      dangerous_distance_threshold: 5.0
+
+    # 效率指标
+    efficiency:
+      target_speed: 30.0 # km/h
+      speed_threshold: 5.0
+      completion_bonus: 100.0
+      timeout_penalty: -50.0
+
+    # 舒适度指标
+    comfort:
+      max_acceleration: 3.0
+      max_jerk: 2.0
+      max_steering_rate: 0.3
+
+    # 规则遵守指标
+    rule_compliance:
+      lane_invasion_penalty: -10.0
+      traffic_light_penalty: -50.0
+      stop_sign_penalty: -30.0
+
+  # 可视化设置
+  visualization:
+    save_path: results/visualizations
+    plot_trajectories: true
+    plot_metrics: true
+    create_video: true
+
+  # 报告设置
+  report:
+    save_path: results/reports
+    generate_pdf: true
+    include_plots: true
+    include_videos: false

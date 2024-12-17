@@ -1,0 +1,83 @@
+# 仪表盘配置
+
+# 基础设置
+basic:
+  title: "CARLA自动驾驶训练监控"
+  refresh_rate: 0.1 # 刷新间隔(秒)
+  dark_mode: true
+
+# 布局设置
+layout:
+  columns: 2
+  rows: 2
+  camera_view_size: [800, 600]
+  lidar_view_size: [600, 600]
+  plot_height: 400
+
+# 显示组件
+components:
+  # 训练指标
+  metrics:
+    enabled: true
+    position: [0, 0]
+    metrics:
+      - name: "reward"
+        title: "回合奖励"
+        color: "blue"
+      - name: "success_rate"
+        title: "成功率"
+        color: "green"
+      - name: "collision_rate"
+        title: "碰撞率"
+        color: "red"
+
+  # 传感器视图
+  sensors:
+    enabled: true
+    position: [0, 1]
+    types:
+      - "camera_rgb"
+      - "camera_semantic"
+      - "lidar"
+
+  # 车辆状态
+  vehicle_state:
+    enabled: true
+    position: [1, 0]
+    metrics:
+      - name: "speed"
+        title: "速度"
+        unit: "km/h"
+      - name: "steering"
+        title: "转向角"
+        unit: "deg"
+      - name: "throttle"
+        title: "油门"
+        unit: "%"
+      - name: "brake"
+        title: "刹车"
+        unit: "%"
+
+  # 训练曲线
+  training_curves:
+    enabled: true
+    position: [1, 1]
+    curves:
+      - name: "episode_reward"
+        title: "回合奖励"
+        window_size: 100
+      - name: "success_rate"
+        title: "成功率"
+        window_size: 100
+
+# 记录设置
+recording:
+  enabled: true
+  save_dir: "recordings"
+  video:
+    enabled: true
+    fps: 30
+    quality: 80
+  metrics:
+    enabled: true
+    save_interval: 100

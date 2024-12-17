@@ -1,0 +1,101 @@
+# 训练课程配置
+
+# 阶段1：基础控制
+stage_1:
+  name: "basic_control"
+  description: "学习基本的车辆控制"
+  scenarios:
+    - "empty_road"
+    - "straight_road"
+    - "gentle_curves"
+  traffic_density: 0.0
+  weather_conditions: ["clear_noon"]
+  completion_criteria:
+    min_success_rate: 0.9
+    min_episodes: 100
+  reward_weights:
+    safety: 1.0
+    efficiency: 0.5
+    comfort: 0.3
+
+# 阶段2：基础导航
+stage_2:
+  name: "basic_navigation"
+  description: "学习基本的路径规划和导航"
+  scenarios:
+    - "simple_turns"
+    - "intersections"
+    - "roundabouts"
+  traffic_density: 0.3
+  weather_conditions:
+    - "clear_noon"
+    - "cloudy"
+  completion_criteria:
+    min_success_rate: 0.8
+    min_episodes: 200
+  reward_weights:
+    safety: 1.0
+    efficiency: 0.8
+    comfort: 0.4
+
+# 阶段3：交通互动
+stage_3:
+  name: "traffic_interaction"
+  description: "学习与其他交通参与者互动"
+  scenarios:
+    - "light_traffic"
+    - "merging"
+    - "yielding"
+  traffic_density: 0.6
+  weather_conditions:
+    - "clear_noon"
+    - "cloudy"
+    - "light_rain"
+  completion_criteria:
+    min_success_rate: 0.7
+    min_episodes: 300
+  reward_weights:
+    safety: 1.2
+    efficiency: 1.0
+    comfort: 0.5
+
+# 阶段4：复杂场景
+stage_4:
+  name: "complex_scenarios"
+  description: "处理复杂的驾驶场景"
+  scenarios:
+    - "heavy_traffic"
+    - "adverse_weather"
+    - "night_driving"
+  traffic_density: 1.0
+  weather_conditions:
+    - "clear_noon"
+    - "cloudy"
+    - "rain"
+    - "fog"
+    - "night"
+  completion_criteria:
+    min_success_rate: 0.6
+    min_episodes: 500
+  reward_weights:
+    safety: 1.5
+    efficiency: 1.0
+    comfort: 0.6
+
+# 阶段5：极限测试
+stage_5:
+  name: "stress_test"
+  description: "在极限条件下测试"
+  scenarios:
+    - "emergency_braking"
+    - "obstacle_avoidance"
+    - "aggressive_traffic"
+  traffic_density: 1.0
+  weather_conditions: ["all"]
+  completion_criteria:
+    min_success_rate: 0.5
+    min_episodes: 1000
+  reward_weights:
+    safety: 2.0
+    efficiency: 1.0
+    comfort: 0.8
