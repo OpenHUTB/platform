@@ -5,6 +5,7 @@ from pathlib import Path
 import json
 import time
 
+
 class Logger:
     """训练日志记录器"""
     def __init__(self, config: Dict):

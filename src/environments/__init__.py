@@ -1,7 +1,7 @@
 """环境模块"""
 from .carla_env import CarlaEnv
-from .sensors import SensorManager
-from .tasks import TaskRegistry, register_task
+from src.environments.sensors.sensor_manager import SensorManager
+from src.environments.tasks.task_registry import TaskRegistry, register_task
 
 __all__ = [
     'CarlaEnv',

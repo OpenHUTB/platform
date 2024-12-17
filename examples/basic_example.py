@@ -2,8 +2,9 @@
 import carla
 import numpy as np
 from src.environments import CarlaEnv
-from src.algorithms.rl.ppo import PPOAgent
-from src.visualization.dashboard import DashboardApp
+from src.algorithms.rl.ppo.ppo_agent import PPOAgent
+from src.visualization.dashboard.dashboard_app import DashboardApp
+
 
 def main():
     # 创建环境
@@ -49,6 +50,7 @@ def main():
         obs = next_obs
         
     print(f"回合完成,总奖励: {total_reward}")
-    
+
+
 if __name__ == "__main__":
-    main() 
+    main()

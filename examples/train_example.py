@@ -1,8 +1,10 @@
 """训练示例"""
 import os
 from src.environments import CarlaEnv
-from src.algorithms.rl.ppo import PPOAgent, PPOTrainer
+from src.algorithms.rl.ppo.ppo_agent import PPOAgent
+from src.algorithms.rl.ppo.ppo_trainer import PPOTrainer
 from src.utils.logger import TensorboardLogger
+
 
 def main():
     # 环境配置

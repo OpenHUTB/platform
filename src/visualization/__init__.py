@@ -1,7 +1,7 @@
 """可视化模块"""
-from .dashboard import Dashboard
+from src.visualization.dashboard.dashboard import Dashboard
 from .recorder import VideoRecorder
-from .logger import Logger
+from src.utils.logger import Logger
 
 __all__ = [
     'Dashboard',

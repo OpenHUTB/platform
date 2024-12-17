@@ -1,6 +1,7 @@
 """算法注册系统"""
 from typing import Dict, Type
-from src.algorithms.base.algorithm import BaseAlgorithm
+from src.algorithms.base import BaseAlgorithm
+
 
 class AlgorithmRegistry:
     """算法注册器"""
@@ -22,9 +23,11 @@ class AlgorithmRegistry:
     def list_algorithms(self) -> list:
         """列出所有已注册算法"""
         return list(self._algorithms.keys())
-        
+
+
 # 全局算法注册器
 ALGORITHM_REGISTRY = AlgorithmRegistry()
+
 
 # 注册装饰器
 def register_algorithm(name: str):

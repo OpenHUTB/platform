@@ -5,6 +5,11 @@ import queue
 import weakref
 import time
 
+import gym
+
+from src.environments.sensors.sensor_manager import SensorManager
+
+
 class CarlaEnv:
     """CARLA环境基类"""
     def __init__(self, config: Dict):
@@ -60,7 +65,53 @@ class CarlaEnv:
             'lane': -0.5,
             'comfort': -0.2
         })
-        
+
+    def _create_observation_space(self) -> gym.Space:
+        pass
+        # """创建观察空间"""
+        # camera_shape = self.config['sensors']['camera_rgb']['shape']
+        # lidar_shape = self.config['sensors']['lidar']['shape']
+        #
+        # return spaces.Dict({
+        #     # 相机观测
+        #     'camera': spaces.Box(
+        #         low=0, high=255,
+        #         shape=camera_shape,
+        #         dtype=np.uint8
+        #     ),
+        #
+        #     # 激光雷达观测
+        #     'lidar': spaces.Box(
+        #         low=-np.inf, high=np.inf,
+        #         shape=lidar_shape,
+        #         dtype=np.float32
+        #     ),
+        #
+        #     # 车辆状态
+        #     'vehicle_state': spaces.Box(
+        #         low=-np.inf, high=np.inf,
+        #         shape=(10,),  # [x, y, z, roll, pitch, yaw, vx, vy, vz, speed]
+        #         dtype=np.float32
+        #     ),
+        #
+        #     # 导航信息
+        #     'navigation': spaces.Box(
+        #         low=-np.inf, high=np.inf,
+        #         shape=(3,),  # [distance, angle, progress]
+        #         dtype=np.float32
+        #     )
+        # })
+
+    def _create_action_space(self) -> gym.Space:
+        pass
+        # """创建动作空间"""
+        # # 连续动作空间: [steer, throttle, brake]
+        # return spaces.Box(
+        #     low=np.array([-1.0, 0.0, 0.0]),
+        #     high=np.array([1.0, 1.0, 1.0]),
+        #     dtype=np.float32
+        # )
+
     def reset(self) -> Dict:
         """重置环境"""
         # 清理现有对象
@@ -218,7 +269,7 @@ class CarlaEnv:
         return False  # 由碰撞传感器实现
         
     def _check_lane_invasion(self) -> bool:
-        """检��车道偏离"""
+        """检查车道偏离"""
         return False  # 由车道传感器实现
         
     def _get_distance_traveled(self) -> float:

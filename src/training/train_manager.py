@@ -4,11 +4,12 @@ from typing import Dict, Any
 import torch
 from torch.utils.tensorboard import SummaryWriter
 
-from src.environments import RLEnv
+from src.environments.rl_env import RLEnv
 from src.algorithms.registry import ALGORITHM_REGISTRY
 from src.utils.logger import Logger
 from src.utils.evaluator import ModelEvaluator
-from src.visualization.dashboard import DashboardApp
+from src.visualization.dashboard.dashboard_app import DashboardApp
+
 
 class TrainManager:
     """训练管理器"""

@@ -2,6 +2,7 @@
 from typing import Dict, Type
 from src.environments.carla_env import CarlaEnv
 
+
 class TaskRegistry:
     """任务注册器"""
     def __init__(self):

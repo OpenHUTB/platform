@@ -7,6 +7,7 @@ from typing import Dict, List
 import cv2
 import time
 
+
 class Dashboard:
     """训练监控仪表盘"""
     def __init__(self, config: Dict):

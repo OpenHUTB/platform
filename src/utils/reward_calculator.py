@@ -2,6 +2,7 @@ import numpy as np
 from typing import Dict
 import yaml
 
+
 class RewardCalculator:
     """奖励计算器"""
     def __init__(self, config_path: str):

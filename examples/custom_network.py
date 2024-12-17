@@ -5,6 +5,7 @@ from typing import Dict, Tuple
 from src.algorithms.base import BaseNetwork
 from src.utils.registry import register_network
 
+
 @register_network("custom_encoder")
 class CustomEncoder(BaseNetwork):
     """自定义编码器网络"""

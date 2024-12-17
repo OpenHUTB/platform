@@ -2,6 +2,7 @@ import numpy as np
 from typing import Dict, List, Tuple
 from collections import deque
 
+
 class ReplayBuffer:
     """经验回放缓冲区"""
     def __init__(self, capacity: int, batch_size: int):

@@ -66,7 +66,7 @@ pip install -e .
 ./CarlaUE4.sh -quality-level=Epic
 
 # 运行训练
-python scripts/train.py --config configs/training/default.yaml
+python scripts/train.py --config configs/training/default.yaml --exp-name demo
 
 # 运行评估
 python scripts/evaluate.py --config configs/evaluation/default.yaml

@@ -5,6 +5,7 @@ import queue
 import weakref
 import cv2
 
+
 class SensorManager:
     """传感器管理器"""
     def __init__(self, config: Dict):

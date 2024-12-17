@@ -3,6 +3,7 @@ from typing import Dict, Any, List
 import torch
 import numpy as np
 
+
 class BaseAlgorithm(ABC):
     """算法基类"""
     def __init__(self, config: Dict):
@@ -27,4 +28,4 @@ class BaseAlgorithm(ABC):
     @abstractmethod
     def load(self, path: str):
         """加载模型"""
-        pass 
+        pass

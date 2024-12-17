@@ -4,6 +4,7 @@ import numpy as np
 from src.environments.rewards.base import BaseReward
 from src.utils.registry import register_reward
 
+
 @register_reward("custom")
 class CustomReward(BaseReward):
     """自定义奖励函数"""

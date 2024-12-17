@@ -7,6 +7,7 @@ from typing import Dict, List
 import json
 import os
 
+
 class DashboardApp:
     """训练监控仪表盘"""
     def __init__(self):

@@ -7,9 +7,12 @@ import logging
 from pathlib import Path
 import yaml
 
+import yaml
+
 from src.training import TrainManager
-from src.utils.config import load_config, merge_configs
-from src.utils.logger import setup_logger
+# from src.utils.config import load_config, merge_configs
+# from src.utils.logger import setup_logger
+
 
 def parse_args():
     """解析命令行参数"""
@@ -34,22 +37,24 @@ def parse_args():
     
     return parser.parse_args()
 
+
 def main():
     """主函数"""
     args = parse_args()
     
     # 加载配置
-    config = load_config(args.config)
+    with open(args.config, 'r') as file:
+        config = yaml.safe_load(file)
     
     # 更新配置
     exp_dir = Path("experiments") / args.exp_name
     exp_dir.mkdir(parents=True, exist_ok=True)
     
-    config.update({
-        "exp_name": args.exp_name,
-        "exp_dir": str(exp_dir),
-        "seed": args.seed
-    })
+    # config.update({
+    #     "exp_name": args.exp_name,
+    #     "exp_dir": str(exp_dir),
+    #     "seed": args.seed
+    # })
     
     if args.num_workers:
         config["environment"]["num_workers"] = args.num_workers
@@ -57,10 +62,10 @@ def main():
         config["environment"]["scenario"] = args.scenario
         
     # 设置日志
-    setup_logger(
-        log_file=exp_dir / "train.log",
-        level=args.log_level
-    )
+    # setup_logger(
+    #     log_file=exp_dir / "train.log",
+    #     level=args.log_level
+    # )
     
     # 保存配置
     with open(exp_dir / "config.yaml", "w") as f:

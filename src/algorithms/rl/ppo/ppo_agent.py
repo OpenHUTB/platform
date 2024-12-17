@@ -4,7 +4,8 @@ import torch.optim as optim
 from typing import Dict, Tuple
 import numpy as np
 
-from src.algorithms.base.algorithm import BaseAlgorithm
+from src.algorithms.base import BaseAlgorithm
+
 
 class PPONetwork(nn.Module):
     """PPO网络"""
@@ -39,6 +40,7 @@ class PPONetwork(nn.Module):
         action = self.actor(features)
         value = self.critic(features)
         return action, value
+
 
 class PPOAgent(BaseAlgorithm):
     """PPO算法实现"""

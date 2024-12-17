@@ -5,6 +5,7 @@ import gym
 from src.environments.base import BaseEnv
 from src.utils.registry import register_env
 
+
 @register_env("custom_navigation")
 class CustomNavigationEnv(BaseEnv):
     """自定义导航环境"""

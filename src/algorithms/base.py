@@ -3,6 +3,7 @@ from typing import Dict, Any, Union, Tuple
 import torch
 import numpy as np
 
+
 class BaseAlgorithm(ABC):
     """算法基类，定义了算法需要实现的基本接口"""
     
