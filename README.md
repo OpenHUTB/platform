@@ -46,13 +46,13 @@
 ### 基础安装
 ```bash
 # 克隆项目
-git clone https://github.com/your-org/carla-test-platform.git
-cd carla-test-platform
+git clone https://github.com/OpenHUTB/platform.git
+cd platform
 
 # 创建虚拟环境
 python -m venv venv
 source venv/bin/activate  # Linux
-# or
+# 或者
 .\venv\Scripts\activate  # Windows
 
 # 安装依赖
@@ -62,8 +62,10 @@ pip install -e .
 ### 2. 运行示例
 
 ```bash
-# 启动CARLA服务器
+# 启动CARLA服务器（Linux）
 ./CarlaUE4.sh -quality-level=Epic
+# Windows
+CarlaUE4.exe
 
 # 运行训练
 python scripts/train.py --config configs/training/default.yaml --exp-name demo
