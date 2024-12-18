@@ -1,8 +1,8 @@
-# CARLA自动驾驶算法测试平台
+# 基于 Carla 的算法测试平台
 
 ## 项目概述
 
-本项目是一个基于CARLA模拟器的自动驾驶算法测试平台，提供了完整的训练和评估框架，支持自定义算法、环境和任务。
+本项目是一个基于 Carla 模拟器的自动驾驶算法测试平台，提供了完整的训练和评估框架，支持自定义算法、环境和任务。
 
 ### 主要特性
 
@@ -272,10 +272,10 @@ A: 调整学习率，检查奖励设计
 
 ## 许可证
 
-本项目采用MIT许可证。详见[LICENSE](LICENSE)文件。
+本项目基于 [项目](https://github.com/siupal/) 进行开发，采用MIT许可证，详见[LICENSE](LICENSE)文件。
 
 ## 联系方式
 
-- 问题反馈：[GitHub Issues](https://github.com/your-org/carla-test-platform/issues)
-- 邮件联系：your.email@example.com
-- 技术讨论：[Discussions](https://github.com/your-org/carla-test-platform/discussions)
+- 问题反馈：[GitHub Issues](https://github.com/OpenHUTB/platform/issues)
+- 邮件联系：whd@hutb.edu.cn
+- 技术讨论：[Discussions](https://github.com/OpenHUTB/platform/discussions)

@@ -2,6 +2,7 @@ import numpy as np
 from typing import Dict
 import cv2
 
+
 class ObservationProcessor:
     """观测处理器"""
     def __init__(self, config: Dict):
